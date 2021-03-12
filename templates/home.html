@@ -1,8 +1,10 @@
-<h1>CCL Code Values</h1>
+<h1>Paste declare statements: </h1>
 
-<form action="{% url 'parse' %}">
-    <textarea cols="200" rows="40" name="fulltext">       
-    </textarea>
+<form action="{% url 'parse' %}" method="POST">
+    <textarea cols="100" rows="40" name="fulltext" style="padding:0px;"></textarea>
+    <textarea cols="100" rows="38" name="demotext" style="background-color: black;color: white;padding: 16px;">declare observation_cd = f8 with Constant(uar_get_code_by_cki("CKI.CODEVALUE!17613")),protect
+declare discharged_cd = f8 with Constant(uar_get_code_by_cki("CKI.CODEVALUE!17019")),protect
+</textarea>
     <br /><br />
     <input type="submit" value="Submit"></input>
 
