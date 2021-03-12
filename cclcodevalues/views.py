@@ -25,5 +25,11 @@ def parsecode(request):
  
     return render(request, 'parsecode.html', {'newCodeValuesLinesDictionary': "\n".join(result)})
 
+@csrf_exempt
 def listedcode(request):
+    print(request.POST.get('code'))
     return render(request, 'listedcode.html')
+
+@csrf_exempt
+def query(request):
+    return render(request, 'query.html')

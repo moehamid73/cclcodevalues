@@ -1,1 +1,20 @@
-<H1>This is the listed code page</H1>
+<H1>Paste "List" here:</H1>
+
+<form action="{% url 'query' %}" method="POST">
+    <textarea cols="100" rows="40" name="fulltext" style="padding:0px;"></textarea>
+    <textarea cols="100" rows="38" name="demotext" style="background-color: black;color: white;padding: 16px;">EXAMPLE:
+
+
+1)declare observation_cd = f8 with Constant(uar_get_code_by_cki("CKI.CODEVALUE!17613")),protect go
+1)call echo(observation_cd ) go
+309312.000000
+1)declare discharged_cd = f8 with Constant(uar_get_code_by_cki("CKI.CODEVALUE!17019")),protect  go
+1)call echo(discharged_cd ) go
+856.000000
+1)
+</textarea>
+
+    <br /><br />
+    <input type="submit" value="NEXT"></input>
+
+</form>
