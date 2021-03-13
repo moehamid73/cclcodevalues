@@ -22,5 +22,6 @@ urlpatterns = [
     path('',  views.homepage),
     path('parsecode/', views.parsecode, name="parse"),
     path('listedcode/', views.listedcode, name="listedcode"),
-    path('query/', views.query, name="query")
+    path('query/', views.query, name="query"),
+    path('output/', views.output, name="output")
 ]

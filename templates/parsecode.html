@@ -1,10 +1,11 @@
 <h1>Copy the below text to DVDev, COMPILE, LIST, COPY the list output, then click "NEXT": </h1>
 
 <form action="/listedcode/" method="POST">
-<input type="hidden" value="{{ newCodeValuesLinesDictionary }}" name="code" />
-<pre style="background-color: black;color: white;padding: 16px;">
-{{ newCodeValuesLinesDictionary }}
-</pre>
-<button type="submit" style="background-color:rgb(0, 217, 255);width: 200px;height: 40px;cursor: pointer;">Next</button> 
+    
+    <input type="hidden" value="{{ newCodeValuesLinesDictionary }}" name="code" />
+    
+    <pre style="background-color: black;color: white;padding: 16px;">{{ newCodeValuesLinesDictionary }}</pre>
+
+    <button type="submit" style="background-color:rgb(0, 217, 255);width: 200px;height: 40px;cursor: pointer;">Next</button> 
 
 </form>

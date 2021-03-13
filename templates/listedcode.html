@@ -1,8 +1,10 @@
 <H1>Paste "List" here:</H1>
 
-<form action="{% url 'query' %}" method="POST">
-    <textarea cols="100" rows="40" name="fulltext" style="padding:0px;"></textarea>
-    <textarea cols="100" rows="38" name="demotext" style="background-color: black;color: white;padding: 16px;">EXAMPLE:
+<form action="{% url 'query' %}" method="POST" name="listcodeform">
+    
+    <textarea cols="100" rows="40" name="listtext" style="padding:0px;"></textarea>
+    
+    <textarea cols="100" rows="38" name="demolisttext" style="background-color: black;color: white;padding: 16px;">EXAMPLE:
 
 
 1)declare observation_cd = f8 with Constant(uar_get_code_by_cki("CKI.CODEVALUE!17613")),protect go
@@ -12,9 +14,10 @@
 1)call echo(discharged_cd ) go
 856.000000
 1)
-</textarea>
+    </textarea>
 
     <br /><br />
+    
     <input type="submit" value="NEXT"></input>
 
 </form>

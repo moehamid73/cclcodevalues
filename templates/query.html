@@ -1,1 +1,19 @@
-<h1>QUERY PAGE</h1>
+<h1>Paste Query Here:</h1>
+
+<form action="{% url 'output' %}" method="POST" name="queryform">
+    
+    <textarea cols="100" rows="40" name="querytext" style="padding:0px;"></textarea>
+    
+    <textarea cols="100" rows="38" name="demoquerytext" style="background-color: black;color: white;padding: 16px;">EXAMPLE:
+
+
+select ta.*
+from table ta 
+where ta.value_code  in (observation_cd, discharged_cd)
+    </textarea>
+
+    <br /><br />
+    
+    <input type="submit" value="NEXT"></input>
+
+</form>
