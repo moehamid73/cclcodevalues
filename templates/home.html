@@ -20,11 +20,13 @@ How to clean the code:
 3- Make sure that the DECLARE statement is on the same line  
 
 
-DO NOT paste code with DECLARE on 2 different lines :
+
+
+DO NOT paste code with DECLARE on 2 different lines like so:
 declare observation_cd 
     = f8 with Constant(uar_get_code_by_cki("CKI.CODEVALUE!17613")),protect
 
-OR with comment at the end, like the ";002" below:
+OR, with comment at the end, like the ";002" below:
 
 declare observation_cd = f8 with Constant(uar_get_code_by_cki("CKI.CODEVALUE!17613")),protect ;002
 
