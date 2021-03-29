@@ -58,10 +58,11 @@ def output(request):
     
     for dictItem, dictValue in listCodesDictionary.items():
         for y in range(len(outputLines)):
-            if outputLines[y].find(dictItem) > -1: 
-                newLine = outputLines[y].replace(dictItem, dictValue)
-                outputLines[y] = newLine
-    # print(outputLines)
+            if outputLines[y].find(dictItem) > -1:
+                if dictValue.isnumeric() == False: 
+                    newLine = outputLines[y].replace(dictItem, dictValue)
+                    outputLines[y] = newLine
+    print(outputLines)
     outputLines.append('with time = 30, format(date, ";;q")')
-    # print(outputLines)
+    print(outputLines)
     return render(request, 'output.html', {'finalOutput' : "\n".join(outputLines)})
