@@ -61,8 +61,7 @@ def output(request):
             if outputLines[y].find(dictItem) > -1: 
                 newLine = outputLines[y].replace(dictItem, dictValue)
                 outputLines[y] = newLine
-    print('moe')
-    print(outputLines)
+    # print(outputLines)
     outputLines.append('with time = 30, format(date, ";;q")')
-    print(outputLines)
+    # print(outputLines)
     return render(request, 'output.html', {'finalOutput' : "\n".join(outputLines)})
