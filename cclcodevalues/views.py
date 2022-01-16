@@ -16,15 +16,26 @@ def parsecode(request):
     result = []
 
     for line in lines:
-        if not line.startswith(";") and len(line) > 1:
-            result.append("%s go" % line )
-            if line.startswith('declare'):
-                varname = line.split('=')[0].split(' ')[1]
-                result.append("call echo(%s) go" % varname)                #call echo(dRefNum) go
+        if line != "\n":
+            if not line.startswith(";") and len(line) > 1:
+                comma_pos = line.find(";")
+                if comma_pos > 0:
+                    temp_line = line[0:comma_pos-1:1]
+                    result.append("%s go" % temp_line)
+                    if line.startswith('declare'):
+                        varname = temp_line.split('=')[0].split(' ')[1]
+                        result.append("call echo(%s) go" % varname)  # call echo(dRefNum) go
+                    else:
+                        result.append(line)
+                else:
+                    result.append("%s go" % line)
+                    if line.startswith('declare'):
+                        varname = line.split('=')[0].split(' ')[1]
+                        result.append("call echo(%s) go" % varname)                #call echo(dRefNum) go
+                    else:
+                        result.append(line)
             else:
                 result.append(line)
-        else:
-            result.append(line)
  
     return render(request, 'parsecode.html', {'newCodeValuesLinesDictionary': "\n".join(result)})
 
