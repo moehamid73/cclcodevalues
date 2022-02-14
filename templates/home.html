@@ -3,9 +3,12 @@
 <h1>Paste declare statements: </h1>
 <h2>Try to clean empty white lines and comments if possible</h2>
 
-<form action="{% url 'parse' %}" method="POST" name="homeform">  
-    <textarea cols="100" rows="32" name="fulltext" style="padding:0px;"></textarea>
-    <textarea cols="100" rows="30" name="demotext" style="background-color: black;color: white;padding: 16px;">Example of CLEANED code to paste in the left pane:
+<form action="{% url 'parse' %}" method="POST" name="homeform">
+    <label>
+        <textarea cols="100" rows="32" name="fulltext" style="padding:0;"></textarea>
+    </label>
+    <label>
+<textarea cols="100" rows="30" name="demotext" style="background-color: black;color: white;padding: 16px;">Example of CLEANED code to paste in the left pane:
 
 
 declare observation_cd = f8 with Constant(uar_get_code_by_cki("CKI.CODEVALUE!17613")),protect
@@ -17,14 +20,14 @@ declare discharged_cd = f8 with Constant(uar_get_code_by_cki("CKI.CODEVALUE!1701
 How to clean the code:
 1- Remove empty white lines
 2- Remove comments at the end of each line
-3- Make sure that the DECLARE statement is on the same line  
+3- Make sure that the DECLARE statement is on the same line
 
 
 
 
 DO NOT paste code with DECLARE on 2 different lines like so:
-declare observation_cd 
-    = f8 with Constant(uar_get_code_by_cki("CKI.CODEVALUE!17613")),protect
+declare observation_cd
+= f8 with Constant(uar_get_code_by_cki("CKI.CODEVALUE!17613")),protect
 
 OR, with comment at the end, like the ";002" below:
 
@@ -33,12 +36,14 @@ declare observation_cd = f8 with Constant(uar_get_code_by_cki("CKI.CODEVALUE!176
 
 
 </textarea>
+    </label>
     <br /><br />
-    <input type="submit" value="Submit" style="background-color:rgb(0, 217, 255);width: 200px;height: 40px;cursor: pointer;"></input>
+    <input type="submit" value="Submit"
+           style="background-color:rgb(0, 217, 255);width: 200px;height: 40px;cursor: pointer;"/>
 
 </form>
 <div style="color: red;font-weight: bold;">
     Disclaimer:<br />
-    1- Website doesn't have a database and doesnt retain any of the code pasted.<br />
+    1- Website doesn't have a database and doesn't retain any of the code pasted.<br />
     2- Please follow you organization's guidelines when using an external website. 
 </div>

@@ -2,24 +2,28 @@
 <!-- <pre style="background-color: white;color: black;padding: 16px;border: black;border-width: 40px;border-color: black;display: inline-block;">{{ finalOutput }}</pre> -->
 <!-- <pre style="height: 800px;white-space:pre-line;border: 1px solid black">{{ finalOutput }}</pre> -->
 
-<textarea cols="100" rows="40" name="ouputtext" style="padding:0px;">{{ finalOutput }}</textarea>
-    
-<textarea cols="100" rows="38" name="outputtext" style="background-color: black;color: white;padding: 16px;">Example of the final output: 
+<label>
+    <textarea cols="100" rows="40" name="ouputtext">{{ finalOutput }}</textarea>
+</label>
+
+<label>
+<textarea cols="100" rows="38" name="outputtext" style="background-color: black;color: white;padding: 16px;">Example of the final output:
 All the variables are replaced by their code values
 ==> Copy, Paste in DVDev, & Run as a standalone query
 
 
 select ta.*
-from table ta 
+from table ta
 where ta.value_code  in (309312.000000, 856.000000)
 </textarea>
+</label>
 <br />
 <br />
 <!-- <a href = "mailto:admin@querycodevalues.com?subject = Feedback&body = Message">Send Feedback</a> -->
-<table width="100%" cellspacing="0" cellpadding="0">
+<table>
     <tr>
         <td>
-            <table cellspacing="0" cellpadding="0">
+            <table>
                 <tr>
                     <td style="border-radius: 2px; background-color:#ED2939">
                         <a href="mailto:moe@festpop.com?subject=code values tool" target="_blank" style="padding: 8px 12px; border: 1px solid #ED2939;border-radius: 2px;font-family: Helvetica, Arial, sans-serif;font-size: 14px; color: #ffffff;text-decoration: none;font-weight:bold;display: inline-block;">

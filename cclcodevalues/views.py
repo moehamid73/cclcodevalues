@@ -1,10 +1,12 @@
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 
-listCodesDictionary = dict() 
+listCodesDictionary = dict()
+
 
 def homepage(request):
     return render(request, 'home.html')
+
 
 @csrf_exempt
 def parsecode(request):
@@ -19,11 +21,11 @@ def parsecode(request):
             if not line.startswith(";") and len(line) > 1:
                 comma_pos = line.find(";")
                 if comma_pos > 0:
-                    if line[comma_pos-1] != " ":
+                    if line[comma_pos - 1] != " ":
                         temp_line = line[:comma_pos:]
                         result.append("%s go" % temp_line)
                     else:
-                        temp_line = line[0:comma_pos-1:1]
+                        temp_line = line[0:comma_pos - 1:1]
                         result.append("%s go" % temp_line)
 
                     if line.startswith('declare'):
@@ -35,7 +37,7 @@ def parsecode(request):
                     result.append("%s go" % line)
                     if line.startswith('declare'):
                         varname = line.split('=')[0].split(' ')[1]
-                        result.append("call echo(%s) go" % varname)                #call echo(dRefNum) go
+                        result.append("call echo(%s) go" % varname)  # call echo(dRefNum) go
                     else:
                         result.append(line)
             else:
@@ -43,41 +45,45 @@ def parsecode(request):
 
     return render(request, 'parsecode.html', {'newCodeValuesLinesDictionary': "\n".join(result)})
 
+
 @csrf_exempt
 def listedcode(request):
     return render(request, 'listedcode.html')
 
+
 @csrf_exempt
 def query(request):
-    listtext = request.POST.get('listtext')
+    list_text = request.POST.get('list_text')
 
-    listlines = listtext.split("\r\n")
+    list_lines = list_text.split("\r\n")
 
     global listCodesDictionary
 
-    for i in range(len(listlines)):                    
-        if listlines[i].startswith("1)call echo("):
-            line2 = listlines[i][5:len(listlines[i])]
-            varname2 = line2[line2.find("(")+1:line2.find(")")].strip()
-            listCodesDictionary[varname2] = listlines[i+1].strip()
+    for i in range(len(list_lines)):
+        if list_lines[i].startswith("1)call echo("):
+            line2 = list_lines[i][5:len(list_lines[i])]
+            print(f"LINE 2: {line2}")
+            varname2 = line2[line2.find("(") + 1:line2.find(")")].strip()
+            listCodesDictionary[varname2] = list_lines[i + 1].strip()
 
     return render(request, 'query.html')
+
 
 @csrf_exempt
 def output(request):
     global listCodesDictionary
 
-    outputText = request.POST.get('querytext')
+    output_text = request.POST.get('querytext')
 
-    outputLines = outputText.split("\r\n")
-    
+    output_lines = output_text.split("\r\n")
+
     for dictItem, dictValue in listCodesDictionary.items():
-        for y in range(len(outputLines)):
-            if outputLines[y].find(dictItem) > -1:
-                if dictValue.isnumeric() == False: 
-                    newLine = outputLines[y].replace(dictItem, dictValue)
-                    outputLines[y] = newLine
-    print(outputLines)
-    outputLines.append('with time = 30, format(date, ";;q")')
-    print(outputLines)
-    return render(request, 'output.html', {'finalOutput' : "\n".join(outputLines)})
+        for y in range(len(output_lines)):
+            if output_lines[y].find(dictItem) > -1:
+                if not dictValue.isnumeric():
+                    new_line = output_lines[y].replace(dictItem, dictValue)
+                    output_lines[y] = new_line
+    print(output_lines)
+    output_lines.append('with time = 30, format(date, ";;q")')
+    print(output_lines)
+    return render(request, 'output.html', {'finalOutput': "\n".join(output_lines)})
