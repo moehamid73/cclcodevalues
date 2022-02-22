@@ -10,22 +10,31 @@ def homepage(request):
 
 @csrf_exempt
 def parsecode(request):
-    fulltext = request.POST['fulltext']
-
-    lines = fulltext.split("\r\n")
-
+    lines = []
     result = []
 
+    fulltext = request.POST['fulltext']
+    temp_lines = fulltext.split("declare")
+
+    # for i in range(len(temp_lines)):
+    #     print(f"{i} == {temp_lines[i]}")
+
+    for temp_line in temp_lines:
+        if len(temp_line) > 1:  # If not empty line
+            temp_line = "declare" + temp_line
+            lines.append(temp_line)
+        # print(f"{temp_line}")
+
     for line in lines:
-        if line != "\n":
+        if line != "\n" or not line.strip():
             if not line.startswith(";") and len(line) > 1:
-                comma_pos = line.find(";")
-                if comma_pos > 0:
-                    if line[comma_pos - 1] != " ":
-                        temp_line = line[:comma_pos:]
+                semicolon_pos = line.find(";")
+                if semicolon_pos > 0:
+                    if line[semicolon_pos - 1] != " ":
+                        temp_line = line[:semicolon_pos:]
                         result.append("%s go" % temp_line)
                     else:
-                        temp_line = line[0:comma_pos - 1:1]
+                        temp_line = line[0:semicolon_pos - 1:1]
                         result.append("%s go" % temp_line)
 
                     if line.startswith('declare'):
