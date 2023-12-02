@@ -1,48 +1,54 @@
-<h1>Output: Copy (ctrl + a), Paste in DVDev (ctrl + v), and Run as a standalone query (ctrl + q)</h1>
-<!-- <pre style="background-color: white;color: black;padding: 16px;border: black;border-width: 40px;border-color: black;display: inline-block;">{{ finalOutput }}</pre> -->
-<!-- <pre style="height: 800px;white-space:pre-line;border: 1px solid black">{{ finalOutput }}</pre> -->
+{% extends "./base.html" %}
+{% block content %}
+    <div class="auto-cols-auto">
+        <div>
+            <h1>Output: Copy (ctrl + a), Paste in DVDev (ctrl + v), and Run as a standalone query (ctrl + q)</h1>
+    
+    
+            <textarea name="ouputtext" rows="24" class="block p-2.5 w-full 
+                text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 
+                focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 
+                dark:border-gray-600 dark:placeholder-gray-400 dark:text-white 
+                dark:focus:ring-blue-500 dark:focus:border-blue-500">{{ finalOutput }}</textarea>
+        </div>
+        <br /><br />
+        <div rows="12" name="outputtext" style="background-color:black;color: white;padding: 16px;">
+                Example of the final output:<br/ ><br/ >
+                All the variables are replaced by their code values<br/ >
+                ==> Copy, Paste in DVDev, & Run as a standalone query<br/ >
+                <br/ ><br/ ><br/ >
+    
+                select ta.*<br/ >
+                from table ta<br/ >
+                where ta.value_code  in (309312.000000, 856.000000)<br/ >
+                with time = 30, format(date, ";;q")<br/ >
+        </div>
 
-<label>
-    <textarea cols="100" rows="40" name="ouputtext">{{ finalOutput }}</textarea>
-</label>
-
-<label>
-<textarea cols="100" rows="38" name="outputtext" style="background-color: black;color: white;padding: 16px;">Example of the final output:
-All the variables are replaced by their code values
-==> Copy, Paste in DVDev, & Run as a standalone query
 
 
-select ta.*
-from table ta
-where ta.value_code  in (309312.000000, 856.000000)
-</textarea>
-</label>
-<br />
-<br />
-<!-- <a href = "mailto:admin@querycodevalues.com?subject = Feedback&body = Message">Send Feedback</a> -->
-<table>
-    <tr>
-        <td>
-            <table>
-                <tr>
-                    <td style="border-radius: 2px; background-color:#ED2939">
-                        <a href="mailto:moe@festpop.com?subject=code values tool" target="_blank" style="padding: 8px 12px; border: 1px solid #ED2939;border-radius: 2px;font-family: Helvetica, Arial, sans-serif;font-size: 14px; color: #ffffff;text-decoration: none;font-weight:bold;display: inline-block;">
-                            Feedback or Suggestions             
-                        </a>
-                    </td>
-                    <td style="border-radius: 2px; background-color:white;width: 400px;"></td>
-                    <td style="border-radius: 2px; background-color:#ED2939">
-                        <a href="{% url 'home' %}" target="_self" style="padding: 8px 12px; border: 1px solid #ED2939;border-radius: 2px;font-family: Helvetica, Arial, sans-serif;font-size: 14px; color: #ffffff;text-decoration: none;font-weight:bold;display: inline-block;">
-                            Start Over             
-                        </a>
-                    </td>
-                </tr>
-            </table>
-        </td>
-    </tr>
-  </table>
-  <div style="color: red;font-weight: bold;">
-    <br />Disclaimer:<br />
-    1- Website doesn't have a database and doesnt retain any of the code pasted.<br />
-    2- Please follow you organization's guidelines when using an external website. 
-</div>
+        <!-- <br />
+        <br /> -->
+        <!-- <a href = "mailto:admin@querycodevalues.com?subject = Feedback&body = Message">Send Feedback</a> -->
+        <!-- <table>
+            <tr>
+                <td>
+                    <table>
+                        <tr>
+                            <td style="border-radius: 2px; background-color:#ED2939">
+                                <a href="mailto:moe@festpop.com?subject=code values tool" target="_blank" style="padding: 8px 12px; border: 1px solid #ED2939;border-radius: 2px;font-family: Helvetica, Arial, sans-serif;font-size: 14px; color: #ffffff;text-decoration: none;font-weight:bold;display: inline-block;">
+                                    Feedback or Suggestions             
+                                </a>
+                            </td>
+                            <td style="border-radius: 2px; background-color:white;width: 400px;"></td>
+                            <td style="border-radius: 2px; background-color:#ED2939">
+                                <a href="{% url 'home' %}" target="_self" style="padding: 8px 12px; border: 1px solid #ED2939;border-radius: 2px;font-family: Helvetica, Arial, sans-serif;font-size: 14px; color: #ffffff;text-decoration: none;font-weight:bold;display: inline-block;">
+                                    Start Over             
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table> -->
+    </div>
+{% endblock content %}
