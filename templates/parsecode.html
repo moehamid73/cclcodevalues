@@ -1,20 +1,31 @@
-<h1>Copy the below text to DVDev, COMPILE, LIST, COPY the list output, then click "NEXT": </h1>
+{% extends "./base.html" %}
+{% block content %}
+    <div class="auto-cols-auto">
+        <ul>
+            <li><h1>Copy the below text to DVDev </h1></li>
+            <li><h1>COMPILE & LIST</h1></li>
+            <li><h1>COPY the list output from DVDev </h1></li>
+            <li><h1>Click "NEXT": </h1></p>
+        </ul>
+        <br/><br />
+        <form action="/listedcode/" method="POST">
+            
+            <input type="hidden" value="{{ newCodeValuesLinesDictionary }}" name="code" />
+            
+            <textarea id="fulltext" name="fulltext" rows="14" 
+                class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 
+                    focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 
+                    dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 
+                    dark:focus:border-blue-500">
+                {{ newCodeValuesLinesDictionary }}
+            </textarea>
+            <!-- <pre style="background-color: black;color: white;padding: 16px;">{{ newCodeValuesLinesDictionary }}</pre> -->
 
-<form action="/listedcode/" method="POST">
-    
-    <input type="hidden" value="{{ newCodeValuesLinesDictionary }}" name="code" />
-    
-    <textarea cols="100" rows="40" name="ouputtext" style="padding:0px;">{{ newCodeValuesLinesDictionary }}</textarea>
-    
-    <!-- <pre style="background-color: black;color: white;padding: 16px;">{{ newCodeValuesLinesDictionary }}</pre> -->
+            <br /><br />
+            <button type="submit" style="background-color:rgb(0, 217, 255);width: 200px;height: 40px;cursor: pointer;">Next</button> 
 
-    <br /><br />
-    <button type="submit" style="background-color:rgb(0, 217, 255);width: 200px;height: 40px;cursor: pointer;">Next</button> 
+        </form>
+    </div>
+{% endblock content %}
 
-</form>
-<div style="color: red;font-weight: bold;">
-    Disclaimer:<br />
-    1- Website doesn't have a database and doesnt retain any of the code pasted.<br />
-    2- Please follow you organization's guidelines when using an external website. 
-</div>
 

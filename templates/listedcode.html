@@ -1,28 +1,44 @@
-<H1>Paste "List" here:</H1>
+{% extends "./base.html" %}
+{% block content %}
+    <H1>Paste "List" here:</H1>
 
-<form action="{% url 'query' %}" method="POST" name="listcodeform">
+    <form action="{% url 'query' %}" method="POST" name="listcodeform">
+        
+        <!-- <textarea cols="100" rows="20" name="list_text" style="padding:0px;"></textarea>
+        <input type="submit" value="NEXT" style="background-color:rgb(0, 217, 255)
+            ;width: 200px;height: 40px;cursor: pointer;"></input> -->
+
+        <textarea id="list_text" name="list_text" rows="14" 
+        class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 
+        focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 
+        dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+
+        </textarea>
+
+        <br /><br />
+        <input type="submit" value="Next"
+            style="background-color:rgb(0, 217, 255);width: 200px;height: 
+            40px;cursor: pointer;"/>
+    </form>
+
+    <div>
+        <br /><br />
+        <div rows="30" name="demotext" style="background-color: 
+            black;color: white;padding: 16px;">
     
-    <textarea cols="100" rows="40" name="list_text" style="padding:0px;"></textarea>
-    
-    <textarea cols="100" rows="38" name="demolist_text" style="background-color: black;color: white;padding: 16px;">Example of a "list" code to paste in the left pane:
+            <textarea cols="100" rows="10" name="demolist_text" style="background-color: black;color: white;padding: 16px;">
+                Example of a "list" code to paste in the left pane:
 
+                1)declare observation_cd = f8 with Constant(uar_get_code_by_cki("CKI.CODEVALUE!17613")),protect go
+                1)call echo(observation_cd ) go
+                309312.000000
+                1)declare discharged_cd = f8 with Constant(uar_get_code_by_cki("CKI.CODEVALUE!17019")),protect  go
+                1)call echo(discharged_cd ) go
+                856.000000
+                1)
+            </textarea>
 
-1)declare observation_cd = f8 with Constant(uar_get_code_by_cki("CKI.CODEVALUE!17613")),protect go
-1)call echo(observation_cd ) go
-309312.000000
-1)declare discharged_cd = f8 with Constant(uar_get_code_by_cki("CKI.CODEVALUE!17019")),protect  go
-1)call echo(discharged_cd ) go
-856.000000
-1)
-    </textarea>
-
-    <br /><br />
-    
-    <input type="submit" value="NEXT" style="background-color:rgb(0, 217, 255);width: 200px;height: 40px;cursor: pointer;"></input>
-
-</form>
-<div style="color: red;font-weight: bold;">
-    Disclaimer:<br />
-    1- Website doesn't have a database and doesnt retain any of the code pasted.<br />
-    2- Please follow you organization's guidelines when using an external website. 
-</div>
+            <br /><br />
+        </div>
+    </div>
+{% endblock content%}

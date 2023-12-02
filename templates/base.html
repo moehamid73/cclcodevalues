@@ -1,0 +1,29 @@
+{% load static %}
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            clifford: '#da373d',
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="m-4">
+    {% block content %}{% endblock %}
+    <br /><br />
+    <div style="color: red;font-weight: bold;">
+        Disclaimer:<br />
+        1- Website doesn't have a database and doesn't retain any of the code pasted.<br />
+        2- Please follow you organization's guidelines when using an external website. 
+    </div>
+</body>
+</html>

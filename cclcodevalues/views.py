@@ -1,10 +1,15 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
 
 listCodesDictionary = dict()
 
 
 def homepage(request):
+    print("************************************************* HOME", request);    #mh
+    if request.method == 'POST':
+        print("************************************************* HOME POST", request);  #mh
+        return redirect('parse')
+    print("************************************************* HOME POST POST", request);    #mh  
     return render(request, 'home.html')
 
 
@@ -12,48 +17,56 @@ def homepage(request):
 def parsecode(request):
     lines = []
     result = []
-
-    fulltext = request.POST['fulltext']
+    print("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ PARSE", request);    #mh
+    fulltext = request.POST.get('fulltext', "")
+    print("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ PARSE", fulltext);    #mh
     temp_lines = fulltext.split("declare")
-
+    print("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ PARSE", len(temp_lines));    #mh
     # for i in range(len(temp_lines)):
     #     print(f"{i} == {temp_lines[i]}")
 
-    for temp_line in temp_lines:
-        if len(temp_line) > 1:  # If not empty line
-            temp_line = "declare" + temp_line
-            lines.append(temp_line)
-        # print(f"{temp_line}")
+    if len(temp_lines) >= 1: 
+        for temp_line in temp_lines:
+            # If not empty line
+            if len(temp_line) >= 10:
+                temp_line = "declare" + temp_line
+                lines.append(temp_line.strip())
+        print(f"lines: {lines}")            #mh
 
-    for line in lines:
-        if line != "\n" or not line.strip():
-            if not line.startswith(";") and len(line) > 1:
-                semicolon_pos = line.find(";")
-                if semicolon_pos > 0:
-                    if line[semicolon_pos - 1] != " ":
-                        temp_line = line[:semicolon_pos:]
-                        result.append("%s go" % temp_line)
-                    else:
-                        temp_line = line[0:semicolon_pos - 1:1]
-                        result.append("%s go" % temp_line)
+        #Check to see if there is a ";" +/- comment at the end of the line
+        #and replace it with "go"
+        for line in lines:
+            print(f"&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&line.strip(): {line.strip()}")            #mh
+            if line != "\n" or not line.strip():
+                if not line.startswith(";") and len(line) > 1:
+                    semicolon_pos = line.find(";")
+                    if semicolon_pos > 0:
+                        if line[semicolon_pos - 1] != " ":
+                            temp_line = line[:semicolon_pos:]
+                            result.append("%s go" % temp_line)
+                        else:
+                            temp_line = line[0:semicolon_pos - 1:1]
+                            result.append("%s go" % temp_line)
+                            # print(f"result: {result}")            #mh
 
-                    if line.startswith('declare'):
-                        varname = temp_line.split('=')[0].split(' ')[1]
-                        result.append("call echo(%s) go" % varname)  # call echo(dRefNum) go
+                        if line.startswith('declare'):
+                            varname = temp_line.split('=')[0].split(' ')[1]
+                            result.append("call echo(%s) go" % varname)  # call echo(dRefNum) go
+                        else:
+                            result.append(line)
                     else:
-                        result.append(line)
+                        result.append("%s go" % line)
+                        if line.startswith('declare'):
+                            varname = line.split('=')[0].split(' ')[1]
+                            result.append("call echo(%s) go" % varname)  # call echo(dRefNum) go
+                        else:
+                            result.append(line)
                 else:
-                    result.append("%s go" % line)
-                    if line.startswith('declare'):
-                        varname = line.split('=')[0].split(' ')[1]
-                        result.append("call echo(%s) go" % varname)  # call echo(dRefNum) go
-                    else:
-                        result.append(line)
-            else:
-                result.append(line)
+                    result.append(line)
 
-    return render(request, 'parsecode.html', {'newCodeValuesLinesDictionary': "\n".join(result)})
-
+        return render(request, 'parsecode.html', {'newCodeValuesLinesDictionary': "\n".join(result)})
+    else:
+        return redirect('home')
 
 @csrf_exempt
 def listedcode(request):

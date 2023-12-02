@@ -1,49 +1,75 @@
-<h3>Quick tool built in a few hours to cut down queries troubleshooting</h3>
+{% extends "./base.html" %}
+{% block content %}
+    <div class="auto-cols-auto">
+        <div>
+            <h3>Quick tool built in a few hours to cut down queries troubleshooting</h3>
 
-<h1>Paste declare statements: </h1>
-<h2>Try to clean empty white lines and comments if possible</h2>
+            <h1>Paste "declare" statements here: </h1>
+            <h2>Try to clean empty white lines and comments if possible (see below)</h2>
+    
+            <form action="{% url 'parse' %}" method="POST" name="homeform">
+                {% csrf_token %}
+                <textarea id="fulltext" name="fulltext" rows="14" class="block p-2.5 w-full 
+                    text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 
+                    focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 
+                    dark:border-gray-600 dark:placeholder-gray-400 dark:text-white 
+                    dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Paste here...">
+                </textarea>
 
-<form action="{% url 'parse' %}" method="POST" name="homeform">
-    <label>
-        <textarea cols="100" rows="32" name="fulltext" style="padding:0;"></textarea>
-    </label>
-    <label>
-<textarea cols="100" rows="30" name="demotext" style="background-color: black;color: white;padding: 16px;">Example of CLEANED code to paste in the left pane:
+                <br /><br />
+                <input type="submit" value="Submit"
+                    style="background-color:rgb(0, 217, 255);width: 200px;height: 
+                    40px;cursor: pointer;"/>
 
+            </form>
+        </div>
 
-declare observation_cd = f8 with Constant(uar_get_code_by_cki("CKI.CODEVALUE!17613")),protect
-declare discharged_cd = f8 with Constant(uar_get_code_by_cki("CKI.CODEVALUE!17019")),protect
+        <div>
+            <br /><br />
+            <div rows="30" name="demotext" style="background-color: 
+                black;color: white;padding: 16px;">
+                <div>
+                    <p>
+                        Example of CLEANED code to paste in the left pane:<br />
+                    </p>
+                </div>
+                
+                <div>
+                    <p>
+                        <ul>
+                            <li>declare observation_cd = f8 with Constant(uar_get_code_by_cki("CKI.CODEVALUE!17613")),protect</li>
+                            <li>declare discharged_cd = f8 with Constant(uar_get_code_by_cki("CKI.CODEVALUE!17019")),protect;</li>
+                        </ul>
+                    </p>
+                </div>
+                
+                <div>
+                    <br />
+                    <p>
+                        How to clean the code:<br />
+                        <ul>
+                            <li>1- Remove empty white lines</li>
+                            <li>2- Remove comments at the end of each line</li>
+                            <li>3- Make sure that the DECLARE statement is on thesame line</li>
+                        </ul>
+                    </p>
+                </div>
 
+                <div>
+                    <br />
+                    <p>
+                        DO NOT paste code with DECLARE on 2 different lines like so:
+                        <br />
+                        declare observation_cd
+                        <br/>
+                        = f8 with Constant(uar_get_code_by_cki("CKI.CODEVALUE!17613")),protect
+                        <br /><br />
+                        OR, with comment at the end, like the ";002" below
+                        <br />
+                        declare observation_cd = f8 with Constant(uar_get_code_by_cki("CKI.CODEVALUE!17613")),protect ;002
+                    </p>
+                </div
+            </div>
+        </div>
 
-
-
-How to clean the code:
-1- Remove empty white lines
-2- Remove comments at the end of each line
-3- Make sure that the DECLARE statement is on the same line
-
-
-
-
-DO NOT paste code with DECLARE on 2 different lines like so:
-declare observation_cd
-= f8 with Constant(uar_get_code_by_cki("CKI.CODEVALUE!17613")),protect
-
-OR, with comment at the end, like the ";002" below:
-
-declare observation_cd = f8 with Constant(uar_get_code_by_cki("CKI.CODEVALUE!17613")),protect ;002
-
-
-
-</textarea>
-    </label>
-    <br /><br />
-    <input type="submit" value="Submit"
-           style="background-color:rgb(0, 217, 255);width: 200px;height: 40px;cursor: pointer;"/>
-
-</form>
-<div style="color: red;font-weight: bold;">
-    Disclaimer:<br />
-    1- Website doesn't have a database and doesn't retain any of the code pasted.<br />
-    2- Please follow you organization's guidelines when using an external website. 
-</div>
+{% endblock content %}
