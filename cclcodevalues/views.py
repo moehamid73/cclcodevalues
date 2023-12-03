@@ -106,6 +106,9 @@ def output(request):
                     new_line = output_lines[y].replace(dictItem, dictValue)
                     output_lines[y] = new_line
     print(output_lines)
-    output_lines.append('with time = 30, format(date, ";;q")')
+    if not output_lines[-1].startswith("with"):
+        print("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%", output_lines[-1])
+        output_lines.append('with time = 30, format(date, ";;q")')
+    
     print(output_lines)
     return render(request, 'output.html', {'finalOutput': "\n".join(output_lines)})

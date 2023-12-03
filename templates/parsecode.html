@@ -2,30 +2,37 @@
 {% block content %}
     <div class="auto-cols-auto">
         <div>
+            <h2 class="underline italic">Instructions:</h2>
             <ul>
-                <li><h1>Copy the below text to DVDev </h1></li>
-                <li><h1>COMPILE & LIST</h1></li>
-                <li><h1>COPY the list output from DVDev </h1></li>
-                <li><h1>Click "NEXT": </h1></p>
+                <li><h2>1- Copy the below text to DVDev </h2></li>
+                <li><h2>2- COMPILE in DVDev</h2></li>
+                <li><h2>2- LIST</h2></li>
+                <li><h2>3- COPY the LIST output from DVDev <span class="text-red-500">(Do not paste yet)</span></h2></li>
+                <li><h2>4- Click "NEXT": </h2></p>
             </ul>
         </div>
-        
         <br/><br />
         <div>
             <form action="{% url 'listedcode' %}" method="POST">
-            
                 <input type="hidden" value="{{ newCodeValuesLinesDictionary }}" name="code" />
-                
                 <textarea id="fulltext" name="fulltext" rows="14" 
                     class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 
                         focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 
                         dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 
                         dark:focus:border-blue-500">{{ newCodeValuesLinesDictionary }}</textarea>
                 <!-- <pre style="background-color: black;color: white;padding: 16px;">{{ newCodeValuesLinesDictionary }}</pre> -->
-    
                 <br /><br />
-                <button type="submit" style="background-color:rgb(0, 217, 255);width: 200px;height: 40px;cursor: pointer;">Next</button> 
-    
+                <div class="flex space-x-10">
+                    <button type="submit" 
+                        class="w-32 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                        Next
+                    </button> 
+                    <button type="submit" class="w-32 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                        <a href="{% url 'home' %}" target="_self" style="padding: 8px 12px; border: 1px solid #ED2939;border-radius: 2px;font-family: Helvetica, Arial, sans-serif;font-size: 14px; color: #ffffff;text-decoration: none;font-weight:bold;display: inline-block;">
+                            Start Over
+                        </a>
+                    </button>
+                </div>
             </form>
         </div>
     </div>

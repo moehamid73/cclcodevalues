@@ -3,28 +3,32 @@
     <div class="auto-cols-auto">
         <div>
             <div>
-                <h3>Quick tool built in a few hours to cut down queries troubleshooting</h3>
-
-                <h1>Paste "declare" statements here: </h1>
-                <h2>Try to clean empty white lines and comments if possible (see below)</h2>
+                <h1 class="italic text-2xl text-center bg-blue-500">Quick tool built in a few hours to cut down queries troubleshooting</h1>
+                <h2 class="underline italic">Instructions:</h2>
+                <h2>1- Paste "declare" statements here: </h2>
+                <h2>2- Try to clean empty white lines and comments if possible (see below)</h2>
             </div>
-            
             <div>
                 {% csrf_token %}
+                <br />
                 <form action="{% url 'parse' %}" method="POST" name="homeform">
                     <textarea id="fulltext" name="fulltext" rows="14" class="block p-2.5 w-full 
                         text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 
                         focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 
                         dark:border-gray-600 dark:placeholder-gray-400 dark:text-white 
                         dark:focus:ring-blue-500 dark:focus:border-blue-500"></textarea>
-    
                     <br /><br />
-                    <input type="submit" value="Submit"
-                        style="background-color:rgb(0, 217, 255);width: 200px;height: 
-                        40px;cursor: pointer;"/>
+                    <div class="flex space-x-10">
+                        <input type="submit" value="Submit"
+                            class="w-32 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"/>
+                        <button type="submit" class="w-32 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                            <a href="{% url 'home' %}" target="_self" style="padding: 8px 12px; border: 1px solid #ED2939;border-radius: 2px;font-family: Helvetica, Arial, sans-serif;font-size: 14px; color: #ffffff;text-decoration: none;font-weight:bold;display: inline-block;">
+                                Start Over             
+                            </a>
+                        </button>
+                    </div>
                 </form>
             </div>
-            
         </div>
 
         <div>
@@ -35,7 +39,6 @@
                         Example of CLEANED code to paste in the left pane:<br />
                     </p>
                 </div>
-                
                 <div>
                     <p>
                         <ul>

@@ -1,15 +1,29 @@
 {% extends "./base.html" %}
 {% block content %}
-    <div class="auto-cols-auto">
-        <div>
-            <h1>Output: Copy (ctrl + a), Paste in DVDev (ctrl + v), and Run as a standalone query (ctrl + q)</h1>
+    <div class="auto-cols-auto w-screen">
+        <div class="w-screen">
+            <h2 class="underline italic">Instructions:</h2>
+            <h2>1- Cope the text in the grey box:</h2>
+            <h2>2- Paste in DVDev</h2>
+            <h2>3- In DVDev, run as a standalone query (ctrl + q)</h2>
     
-    
-            <textarea name="ouputtext" rows="24" class="block p-2.5 w-full 
+            <textarea name="ouputtext" rows="12" class="block p-2.5 w-full 
                 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 
                 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 
                 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white 
                 dark:focus:ring-blue-500 dark:focus:border-blue-500">{{ finalOutput }}</textarea>
+        </div>
+        <br /><br />
+        <div class="flex space-x-10">
+            <!-- <button type="submit" 
+                class="w-32 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                Next
+            </button>  -->
+            <button type="submit" class="w-32 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                <a href="{% url 'home' %}" target="_self" style="padding: 8px 12px; border: 1px solid #ED2939;border-radius: 2px;font-family: Helvetica, Arial, sans-serif;font-size: 14px; color: #ffffff;text-decoration: none;font-weight:bold;display: inline-block;">
+                    Start Over
+                </a>
+            </button>
         </div>
         <br /><br />
         <div rows="12" name="outputtext" style="background-color:black;color: white;padding: 16px;">
