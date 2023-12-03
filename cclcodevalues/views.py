@@ -5,11 +5,8 @@ listCodesDictionary = dict()
 
 
 def homepage(request):
-    print("************************************************* HOME", request);    #mh
     if request.method == 'POST':
-        print("************************************************* HOME POST", request);  #mh
         return redirect('parse')
-    print("************************************************* HOME POST POST", request);    #mh  
     return render(request, 'home.html')
 
 
@@ -17,13 +14,9 @@ def homepage(request):
 def parsecode(request):
     lines = []
     result = []
-    print("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ PARSE", request);    #mh
+
     fulltext = request.POST.get('fulltext', "")
-    print("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ PARSE", fulltext);    #mh
     temp_lines = fulltext.split("declare")
-    print("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ PARSE", len(temp_lines));    #mh
-    # for i in range(len(temp_lines)):
-    #     print(f"{i} == {temp_lines[i]}")
 
     if len(temp_lines) >= 1: 
         for temp_line in temp_lines:
@@ -36,7 +29,7 @@ def parsecode(request):
         #Check to see if there is a ";" +/- comment at the end of the line
         #and replace it with "go"
         for line in lines:
-            print(f"&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&line.strip(): {line.strip()}")            #mh
+            # print(f"&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&line.strip(): {line.strip()}")            #mh
             if line != "\n" or not line.strip():
                 if not line.startswith(";") and len(line) > 1:
                     semicolon_pos = line.find(";")
@@ -77,16 +70,17 @@ def listedcode(request):
 def query(request):
     list_text = request.POST.get('list_text')
 
-    list_lines = list_text.split("\r\n")
+    if len(list_text) > 0:
+        list_lines = list_text.split("\r\n")
 
-    global listCodesDictionary
+        global listCodesDictionary
 
-    for i in range(len(list_lines)):
-        if list_lines[i].startswith("1)call echo("):
-            line2 = list_lines[i][5:len(list_lines[i])]
-            print(f"LINE 2: {line2}")
-            varname2 = line2[line2.find("(") + 1:line2.find(")")].strip()
-            listCodesDictionary[varname2] = list_lines[i + 1].strip()
+        for i in range(len(list_lines)):
+            if list_lines[i].startswith("1)call echo("):
+                line2 = list_lines[i][5:len(list_lines[i])]
+                print(f"LINE 2: {line2}")
+                varname2 = line2[line2.find("(") + 1:line2.find(")")].strip()
+                listCodesDictionary[varname2] = list_lines[i + 1].strip()
 
     return render(request, 'query.html')
 
@@ -96,19 +90,19 @@ def output(request):
     global listCodesDictionary
 
     output_text = request.POST.get('querytext')
+    if len(output_text) > 0:
+        output_lines = output_text.split("\r\n")
 
-    output_lines = output_text.split("\r\n")
-
-    for dictItem, dictValue in listCodesDictionary.items():
-        for y in range(len(output_lines)):
-            if output_lines[y].find(dictItem) > -1:
-                if not dictValue.isnumeric():
-                    new_line = output_lines[y].replace(dictItem, dictValue)
-                    output_lines[y] = new_line
-    print(output_lines)
-    if not output_lines[-1].startswith("with"):
-        print("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%", output_lines[-1])
-        output_lines.append('with time = 30, format(date, ";;q")')
-    
-    print(output_lines)
+        for dictItem, dictValue in listCodesDictionary.items():
+            for y in range(len(output_lines)):
+                if output_lines[y].find(dictItem) > -1:
+                    if not dictValue.isnumeric():
+                        new_line = output_lines[y].replace(dictItem, dictValue)
+                        output_lines[y] = new_line
+        print(output_lines)
+        if not output_lines[-1].startswith("with"):
+            # print("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%", output_lines[-1]) #mh
+            output_lines.append('with time = 30, format(date, ";;q")')
+        
+        # print(output_lines)   #mh
     return render(request, 'output.html', {'finalOutput': "\n".join(output_lines)})

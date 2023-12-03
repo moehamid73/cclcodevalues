@@ -25,7 +25,7 @@ SECRET_KEY = 'lrq81a94ypve2&5(pon+8$!k+)1mir)izzwoqo20173w-a*po%'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['157.230.50.169', '127.0.0.1']
+ALLOWED_HOSTS = ['querycodevalues.com', 'www.querycodevalues.com', '127.0.0.1']
 
 
 # Application definition
