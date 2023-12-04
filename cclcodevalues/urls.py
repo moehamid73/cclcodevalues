@@ -15,6 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.templatetags.static import static # Not from django.conf.urls.static 
+from django.views.generic.base import RedirectView
 from .views import (
     homepage,
     parsecode,
@@ -30,5 +32,6 @@ urlpatterns = [
     path('parsecode/', views.parsecode, name="parse"),
     path('listedcode/', views.listedcode, name="listedcode"),
     path('query/', views.query, name="query"),
-    path('output/', views.output, name="output")
+    path('output/', views.output, name="output"),
+    path('favicon.ico', RedirectView.as_view(url=static('favicon.ico')))
 ]
